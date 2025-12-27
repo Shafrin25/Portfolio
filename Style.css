@@ -105,12 +105,14 @@ nav {
 
 /* HOME */
 #home {
-  min-height: calc(100vh - 90px); /* full screen minus navbar */
-  padding-top: 90px;             /* push content below navbar */
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 90px;  
 }
+
 
 #home img {
   width: 70%;
