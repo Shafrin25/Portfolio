@@ -1422,12 +1422,12 @@ html{
 /* ================= MOBILE FIX ================= */
 @media (max-width: 768px) {
 
-  /* Stop drag chaos */
-  * {
+  /* Disable touch drag completely */
+  body.public-view * {
     touch-action: manipulation;
   }
 
-  /* Navbar spacing */
+  /* Navbar */
   nav {
     height: 70px;
     padding: 0 16px;
@@ -1435,8 +1435,8 @@ html{
 
   /* HOME section */
   #home {
-    min-height: 100vh;
-    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+    padding-top: 70px;
   }
 
   #home img {
@@ -1444,27 +1444,36 @@ html{
     max-width: 360px;
   }
 
-  /* Hide editor-only visuals */
-  .resize-handle,
-  .rotate-handle,
-  .about1-resize,
-  .about1-rotate,
-  .freeze-btn {
+  /* Hide ALL editor visuals */
+  body.public-view .resize-handle,
+  body.public-view .rotate-handle,
+  body.public-view .about1-resize,
+  body.public-view .about1-rotate,
+  body.public-view .freeze-btn {
     display: none !important;
   }
 
-  /* Center intro text */
-  .editor-text,
-  .text-box {
+  /* Text readability */
+  body.public-view .editor-text,
+  body.public-view .text-box {
     font-size: 1.1rem !important;
     line-height: 1.6;
     text-align: center;
   }
 
-  /* Reduce floating clutter */
-  .editor-element,
-  .about1-editable,
-  .skill-edit {
+  /* Stop floating / absolute chaos */
+  body.public-view .editor-element,
+  body.public-view .about1-editable,
+  body.public-view .skill-edit {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
     transform: none !important;
+    margin: 20px auto !important;
+  }
+
+  /* Hide custom cursor on mobile */
+  .cursor-follower {
+    display: none !important;
   }
 }

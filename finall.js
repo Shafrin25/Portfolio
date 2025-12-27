@@ -1,3 +1,13 @@
+/* ===== FORCE PUBLIC VIEW ON GITHUB PAGES ===== */
+const isGitHubPages = location.hostname.includes("github.io");
+
+if (isGitHubPages) {
+  localStorage.setItem("portfolioFrozen", "true");
+  document.body.classList.add("portfolio-frozen", "public-view");
+}
+
+
+
 /**********************************************************
   1. MODE DETECTION & PERSISTENCE
 **********************************************************/
