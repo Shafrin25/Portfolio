@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tools Section</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  background:#05070a;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ================= SECTION ================= */
+.tools-section{
+  position:relative;
+  padding-top:140px;
+
+  min-height:100vh;
+  background:url("image.jpeg") center/cover no-repeat;
+}
+
+.tools-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(5,7,10,0.92),
+    rgba(5,7,10,0.88)
+  );
+  z-index:1;
+}
+.tools-section>*{
+  position:relative;
+  z-index:2;
+}
+
+/* ================= TITLE ================= */
+.tools-title{
+  text-align:center;
+  margin:80px 0 90px;
+  font-size:3.8rem;
+  font-weight:800;
+  letter-spacing:6px;
+  background:linear-gradient(to bottom,#e6dcd7,#b6bcc8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ================= MARQUEE ================= */
+.tools-marquee{width:100%;overflow:hidden}
+.tools-track{
+  display:flex;
+  gap:40px;
+  width:max-content;
+  animation:scroll-left 40s linear infinite;
+}
+@keyframes scroll-left{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ================= TOOL CARD ================= */
+.tool-card{
+  width:220px;height:140px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  border-radius:16px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+  border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(18px);
+}
+.icon-box img{max-width:44px;max-height:44px}
+.tool-card span{
+  font-size:.95rem;
+  letter-spacing:1.5px;
+  color:rgba(200,204,210,.85);
+}
+
+/* ================= EDITABLE AI IMAGE ================= */
+.ai-edit{
+  position:absolute;
+  top:140px;
+  right:120px;
+  width:160px;
+  cursor:move;
+  z-index:5;
+  transform-origin:center center;
+  user-select:none;
+}
+.ai-edit img{
+  width:100%;
+  display:block;
+  pointer-events:none;
+}
+.rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#60a5fa;
+  cursor:grab;
+}
+
+/* FREEZE BUTTON */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:600;
+  cursor:pointer;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeAI()">FREEZE</button>
+
+<section class="tools-section">
+
+  <h2 class="tools-title">TOOLS</h2>
+
+  <div class="tools-marquee">
+    <div class="tools-track">
+      <div class="tool-card"><div class="icon-box"><img src="chatgpt.png"></div><span>CHAT GPT</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="figma.png"></div><span>FIGMA</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="canva.png"></div><span>CANVA</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="powerpoint.png"></div><span>POWERPOINT</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="excel.png"></div><span>EXCEL</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="vscode.png"></div><span>VS CODE</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="github.png"></div><span>GITHUB</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="powerbi.png"></div><span>POWER BI</span></div>
+    </div>
+  </div>
+
+  <!-- AI IMAGE -->
+  <div class="ai-edit" id="aiEdit" data-id="ai">
+    <div class="rotate-handle"></div>
+    <img src="ai.png" alt="AI">
+  </div>
+
+</section>
+
+<script>
+const box=document.getElementById("aiEdit");
+let angle=0;
+
+/* LOAD SAVED */
+const saved=JSON.parse(localStorage.getItem("ai"));
+if(saved){
+  box.style.width=saved.width;
+  box.style.transform=
+    `translate(${saved.x}px,${saved.y}px) rotate(${saved.angle}deg)`;
+  box.dataset.x=saved.x;
+  box.dataset.y=saved.y;
+  angle=saved.angle;
+}
+
+/* DRAG */
+interact(box).draggable({
+  listeners:{
+    move(e){
+      if(localStorage.getItem("aiFrozen")) return;
+      const x=(+box.dataset.x||0)+e.dx;
+      const y=(+box.dataset.y||0)+e.dy;
+      box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+      box.dataset.x=x; box.dataset.y=y;
+    }
+  }
+});
+
+/* RESIZE */
+interact(box).resizable({
+  edges:{left:true,right:true,top:true,bottom:true}
+}).on("resizemove",e=>{
+  if(localStorage.getItem("aiFrozen")) return;
+  box.style.width=e.rect.width+"px";
+  const x=(+box.dataset.x||0)+e.deltaRect.left;
+  const y=(+box.dataset.y||0)+e.deltaRect.top;
+  box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+  box.dataset.x=x; box.dataset.y=y;
+});
+
+/* ROTATE */
+interact(".rotate-handle").draggable({
+  listeners:{
+    move(e){
+      if(localStorage.getItem("aiFrozen")) return;
+      angle+=e.dx;
+      const x=+box.dataset.x||0;
+      const y=+box.dataset.y||0;
+      box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+    }
+  }
+});
+
+/* SAVE */
+function save(){
+  localStorage.setItem("ai",JSON.stringify({
+    x:+box.dataset.x||0,
+    y:+box.dataset.y||0,
+    width:box.style.width,
+    angle
+  }));
+}
+document.addEventListener("mouseup",save);
+
+/* FREEZE */
+function freezeAI(){
+  save();
+  localStorage.setItem("aiFrozen","true");
+  box.querySelector(".rotate-handle")?.remove();
+  box.style.pointerEvents="none";
+  document.querySelector(".freeze-btn").remove();
+  alert("AI image frozen permanently ✔");
+}
+
+/* RESTORE FREEZE */
+if(localStorage.getItem("aiFrozen")){
+  box.querySelector(".rotate-handle")?.remove();
+  box.style.pointerEvents="none";
+  document.querySelector(".freeze-btn")?.remove();
+}
+</script>
+
+</body>
+</html>

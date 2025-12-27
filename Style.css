@@ -1,0 +1,1412 @@
+:root {
+  --bg-dark: #0f172a;
+  --text-light: #f8fafc;
+  --highlight: #0ea5e9;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  color: var(--text-light);
+  background-color: var(--bg-dark);
+  background-image: url('image.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+}
+#intro{
+  background:url("image.jpeg") center/cover fixed no-repeat;
+  background-color:rgba(0,0,0,0.75);
+  background-blend-mode:overlay;
+  font-family:'Gloria Hallelujah', cursive;
+  overflow-x:hidden;
+}
+#intro .editor-text {
+  top: 50% !important;
+  width: 600px !important;
+  left: 25% !important; 
+    /* ⬆ move up */
+}
+
+/* NAVBAR */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;              /* 🔑 FULL WIDTH */
+  height: 90px; 
+  background: #0f172a;
+  padding: 1rem 2.5rem;
+  z-index: 99999;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-img {
+  height: 60px;
+  object-fit: contain;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.nav-center button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-center button:hover {
+  color: #38bdf8;
+}
+
+.contact-btn {
+  background: #55bee4;
+  border: none;
+  padding: 0.7rem 1.7rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.contact-btn:hover {
+  background: #55bee4;
+  transform: scale(1.05);
+}
+/* ===== GLOBAL SLIDE BACKGROUND (USE EVERYWHERE) ===== */
+.slide-bg-common {
+  background: 
+    linear-gradient(rgba(5,10,25,0.85), rgba(5,10,25,0.85)),
+    url('image.jpeg') center/cover fixed no-repeat;
+  background-blend-mode: overlay;
+
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* HOME */
+#home {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#home img {
+  width: 70%;
+  max-width: 700px;
+  filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.3));
+}
+.menu{
+  display:flex;
+  gap:24px;
+  align-items:center;
+  list-style:none;
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.contact-icon{
+  width:160px;
+  cursor:pointer;
+
+  position:absolute;
+  right:0;
+  top:50%;
+  transform: translateY(-50%)
+  
+}
+
+/* EDIT MODE ONLY */
+.editable{
+  resize: both;
+  overflow: auto;
+  border:1px dashed #56c0e7;
+}
+
+/* VIEW MODE */
+.frozen{
+  resize:none;
+  border:none;
+  cursor:default;
+}
+
+.layout{
+  position:relative;
+  height:100vh;
+}
+
+/* editor */
+.editor-element{
+  position:absolute;
+  cursor:move;
+  user-select:none;
+}
+
+.resize-handle{
+  width:15px;
+  height:15px;
+  background:white;
+  border:2px solid black;
+  position:absolute;
+  bottom:-10px;
+  right:-10px;
+  cursor:se-resize;
+}
+
+.rotate-handle{
+  width:20px;
+  height:20px;
+  background:#1e90ff;
+  border-radius:50%;
+  border:2px solid white;
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  cursor:grab;
+}
+
+.editor-text{
+  color:#c3eaff;
+  font-size:1.9rem;
+  text-align:center;
+  line-height:1.6;
+}
+
+
+/* ===== SLIDE 3 ===== */
+/* ================= SLIDE 3 ================= */
+/* ================= SLIDE 3 ================= */
+#slide3 {
+  margin:0;
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* EDITOR CONTAINER */
+#slide3 .editor {
+  position: absolute;
+  cursor: move;
+  transform-origin: center center;
+  box-sizing: border-box;
+  min-width: 50px;
+  min-height: 50px;
+  z-index:10;
+  display: inline-block;
+  max-width: calc(100vw - 40px);
+  touch-action: none; /* Crucial for mobile and desktop drag/resize */
+}
+
+
+/* Ensure content fills the resizable box */
+#slide3 .editor img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none; /* Prevents image dragging from breaking the resize */
+  object-fit: contain;
+  position:relative;
+  z-index:11;
+}
+
+#slide3 .text-box {
+  max-width: 100%;
+  
+
+  text-align: left !important;      /* 🔑 left alignment */
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 1.3rem;
+  line-height: 2.1rem;
+
+  white-space: normal;              /* 🔑 natural wrapping */
+  word-break: normal;
+
+}
+
+#slide3 .second {
+  margin-left: 40px;
+}
+
+/* HANDLES */
+#slide3 .rotate-handle {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #60a5fa;
+  border-radius: 50%;
+  cursor: grab;
+  z-index: 20;
+}
+
+#slide3 .resize-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 2px solid #60a5fa;
+  right: -7px;
+  bottom: -7px;
+  cursor: se-resize;
+  z-index: 20;
+}
+
+/* ANIMATIONS */
+#slide3 .editor.book-3d img {
+  animation: bookFloat 6s ease-in-out infinite;
+  filter: drop-shadow(0 25px 35px rgba(0,0,0,0.6));
+  
+}
+@keyframes bookFloat {
+  0%, 100% { transform: translateY(0) rotateX(6deg); }
+  50% { transform: translateY(-12px) rotateX(10deg); }
+}
+
+/* Update this specific block in your CSS */
+.editor.arrow-hero-3d {
+  perspective: 1400px;
+  transform-style: preserve-3d; /* Keep children in 3D space */
+  z-index: 25; /* Ensure it sits above the background */
+}
+
+
+
+.editor.arrow-hero-3d img {
+  display: block;
+  position: absolute;   /* required */
+  top: 20px;  
+  left: -10px;
+  width: 160px; /* Ensure size is set */
+  height: auto;
+  opacity: 1 !important; /* Ensure it's not transparent */
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transform-style: preserve-3d;
+  animation: arrowHero 7s ease-in-out infinite;
+  filter: drop-shadow(0 40px 50px rgba(0,0,0,0.7));
+}
+@keyframes arrowHero{
+  0%{ transform:rotateY(0deg); }
+  50%{ transform:rotateY(20deg); }
+  100%{ transform:rotateY(0deg); }
+}
+
+
+
+/* ================= SLIDE 4 : ABOUT ================= */
+#about{
+  margin:0;
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================= CANVAS ================= */
+#about #canvas{
+  position:relative;
+  width:100vw;
+  min-height:100vh;   /* ✅ allow scrolling */
+  height:auto;
+  perspective:1200px;
+}
+
+
+/* ================= ELEMENT ================= */
+#about .element{
+  position:absolute;
+  user-select:none;
+}
+
+/* ================= TEXT ================= */
+#about .text{
+  font-size:18px;
+  line-height:1.7;
+  text-align:center;
+}
+
+/* ================= IMAGE ================= */
+#about img{
+  width:100%;
+  display:block;
+}
+
+/* ================= ABOUT IMAGE 3D ================= */
+#about .about-3d{
+  transform-style:preserve-3d;
+  animation:aboutFloat 6s ease-in-out infinite;
+}
+
+#about .about-3d img{
+  filter:drop-shadow(0 20px 30px rgba(0,0,0,0.45));
+  transform:rotateY(-10deg) rotateX(6deg) translateZ(30px);
+  transition:transform 0.6s ease;
+}
+
+#about .about-3d:hover img{
+  transform:rotateY(0deg) rotateX(0deg) translateZ(60px) scale(1.05);
+}
+
+@keyframes aboutFloat{
+  0%,100%{ transform:translateY(0px); }
+  50%{ transform:translateY(-10px); }
+}
+
+/* ================= MUSHROOM 3D ================= */
+#about .mush-3d{
+  transform-style:preserve-3d;
+  animation:mushFloat 3.5s ease-in-out infinite;
+}
+
+#about .mush-3d img{
+  filter:drop-shadow(0 25px 35px rgba(0,0,0,0.5));
+  transform:translateZ(50px) rotateZ(-4deg);
+  transition:transform 0.4s ease;
+}
+
+#about .mush-3d:hover img{
+  transform:translateZ(90px) rotateZ(0deg) scale(1.15);
+}
+
+@keyframes mushFloat{
+  0%,100%{ transform:translateY(0px); }
+  50%{ transform:translateY(-16px); }
+}
+/* ================= ABOUT-1 : HANDWRITING ================= */
+/* ================= ABOUT SECTION ================= */
+/* ================= ABOUT SECTION (SLIDE 5) ================= */
+/* ================= ABOUT SECTION ================= */
+.about1-section{
+  margin:0;
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* TEXT */
+.about1-handwriting{
+  font-size:1.6rem;
+  color:#fc9fb6;
+  line-height:1.8;
+  text-align:center;
+  margin:0;
+}
+
+/* EDITABLE */
+.about1-editable{
+  position:absolute;
+  cursor:move;
+  user-select:none;
+  transform-origin:center;
+  touch-action: none; /* Required for JS to work */
+  z-index: 10;
+}
+
+.about1-editable img{
+  width:100%;
+  height: 100%; /* Added to allow resizing */
+  display:block;
+  pointer-events: none; /* Prevents image from blocking drag */
+}
+
+/* Z-INDEX */
+.about1-text{ z-index:20; }
+
+/* HANDLES */
+.about1-resize{
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border:2px solid #000;
+  right:-8px;
+  bottom:-8px;
+  cursor:se-resize;
+  z-index: 30; /* Ensure it is on top */
+}
+
+.about1-rotate{
+  position:absolute;
+  top:-28px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  background:#38bdf8;
+  border-radius:50%;
+  border:2px solid #000;
+  cursor:grab;
+  z-index: 30; /* Ensure it is on top */
+}
+
+/* ANIMATION */
+@keyframes about1Float{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(45px); }
+}
+
+.about1-loop img{
+  animation:about1Float 3s linear infinite;
+}
+
+/* ================= PROJECTS SLIDE ================= */
+
+#projects{
+  margin:0;
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+.projects {
+  position:relative;
+  overflow:visible;
+  min-height:100vh;
+  height:auto;
+}
+
+/* DRAGGABLE ELEMENTS */
+.projects .editable{
+  position:absolute;
+  user-select:none;
+  cursor:grab;
+  pointer-events:auto !important;
+}
+.projects .editable:active{ cursor:grabbing; }
+
+/* FREEZE BUTTON */
+
+/* OVERLAY */
+.projects .overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  pointer-events: auto;
+  perspective:1200px;
+}
+.projects .overlay.show{ display:flex; }
+
+/* 3D CARD */
+.projects .card3d{
+  width:480px;
+  background:rgba(15,23,42,0.92);
+  backdrop-filter:blur(14px);
+  padding:32px;
+  border-radius:22px;
+  color:#f8fafc;
+  transform:rotateX(15deg) scale(.7);
+  transition:.4s ease;
+}
+.projects .overlay.show .card3d{
+  transform:rotateX(0) scale(1);
+}
+/* IMAGE INSIDE PROJECT CARD */
+.projects .card3d img{
+  width:100%;
+  margin:16px 0;
+  border-radius:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+}
+
+.projects .card3d h2{ color:#38bdf8; margin-top:0; }
+.projects .card3d p{ color:#cbd5f5; line-height:1.6; }
+.projects .card3d ul{ list-style:none; padding:0; }
+.projects .card3d li{ margin:8px 0; }
+
+.projects .processing{ color:#facc15; font-weight:600; margin-top:14px; }
+.projects .coming-soon{ color:#94a3b8; font-size:.95rem; }
+
+/* VIDEO */
+.projects .project-video video{
+  width:100%;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+/*folder */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* BACKGROUND */
+.bg-image{
+  position:fixed; inset:0;
+  z-index:-2;
+}
+
+
+#folder{
+  overflow:auto;
+  position: relative;
+  font-family:sans-serif;
+}
+.folder {
+  position: relative;   /* anchor for absolute children */
+  overflow: hidden;
+}
+
+/* STAGE */
+.stage{
+  width:100vw;
+  height:100vh;
+  padding:140px 160px 120px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.wrapper{
+  display:flex;
+  gap:240px;
+}
+
+/* EDITOR ITEM */
+.editor-item{
+  position:relative;
+  cursor:move;
+  touch-action:none;
+  transform-origin:center;
+}
+
+/* FOLDER */
+.folder-container{
+  width:300px;
+  height:220px;
+  position: relative;
+  overflow: visible;
+   z-index: 10;
+}
+.folder-img{
+  width:100%;
+  display:block;
+  pointer-events:auto;
+}
+
+/* CARDS */
+.cards{
+  position:absolute;
+  top:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+  overflow: visible; 
+}
+.card{
+  position:absolute;
+  width:250px;
+  border-radius:18px;
+  opacity:0;
+  transform:translate(-50%,60px) scale(.65);
+  transition:0.6s;
+}
+/* ================= PROJECTS EDITOR ================= */
+
+/* Editor visuals (only while editing) */
+.project-section .editable {
+  position: absolute;
+  cursor: grab;
+  outline: 1px dashed rgba(0, 200, 255, 0.6);
+}
+
+.project-section .editable:active {
+  cursor: grabbing;
+}
+
+
+
+/* HOVER ANIMATION */
+.folder-img:hover ~ .cards .c1{
+  transform:translate(-261px,-120px) rotate(-14deg);
+  opacity:1;
+}
+.folder-img:hover ~ .cards .c2{
+  transform:translate(0,-160px);
+  opacity:1;
+}
+.folder-img:hover ~ .cards .c3{
+  transform:translate(261px,-120px) rotate(14deg);
+  opacity:1;
+}
+
+
+/* 3D RESUME */
+.folder-3d{
+  position:relative;
+  top:80px;
+  left:80px;
+  width:240px;
+  z-index: 9999;
+  perspective:1200px;
+}
+.folder-3d a {
+  pointer-events: auto;
+}
+
+.folder-3d-inner{
+  transform-style:preserve-3d;
+  transform:rotateX(18deg) rotateY(-22deg) translateZ(40px);
+}
+.folder-3d-inner img{
+  width:100%;
+  cursor:pointer;
+  filter:drop-shadow(0 45px 55px rgba(0,0,0,0.7));
+}
+
+/* ROTATE HANDLE */
+.rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  background:#f97316;
+  border-radius:50%;
+  cursor:grab;
+}
+
+.resume-folder-fixed {
+  position: absolute;        /* 🔥 KEY CHANGE */
+  right: 40px;            /* push to screen right */
+  bottom: 50px;          /* vertical position */
+  width: 180px;
+  height: 180px;
+  z-index: 25;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.resume-folder-fixed:hover {
+  transform: scale(1.08);
+}
+
+.resume-folder-fixed img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.experience-title {
+  position: absolute;
+  top: 120px;              /* adjust if needed */
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: 6px;
+
+  color: #d9d1cc;         /* soft silver */
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    to bottom,
+    #accdf3,
+    #1e2e43
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  z-index: 2;
+  pointer-events: none;  /* ✅ no interaction issues */
+}
+
+
+/* ================= TOOLS SECTION ONLY ================= */
+#tools{
+  position: relative;
+  overflow: hidden;   /* 🔑 THIS STOPS LEAKING */
+}
+
+.tools-section{
+  position:relative;
+  min-height:100vh;
+  padding-top:40px;
+}
+
+.tools-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(5,10,25,0.95), rgba(5,10,25,0.85)),
+    url('image.jpeg') center/cover fixed no-repeat;
+  z-index:1;
+}
+.tools-section > *{
+  position:relative;
+  z-index:2;
+}
+
+/* TITLE */
+.tools-title{
+  text-align:center;
+  margin:60px 0 25px;   /* ⬅ smaller, tighter */
+  font-size:3.8rem;
+  font-weight:800;
+  letter-spacing:6px;
+  background:linear-gradient(to bottom,#d2cbc5,#6d6967);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+
+/* MARQUEE */
+.tools-marquee{
+  width:100%;
+ margin-top: 60px;   /* ⬅ pushes cards down */
+  padding-bottom: 40px;  overflow:hidden
+}
+.tools-track{
+  display:flex;
+  gap:40px;
+  width:max-content;
+  animation:tools-scroll 40s linear infinite;
+}
+@keyframes tools-scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* TOOL CARD */
+.tool-card{
+  width:220px;
+  height:140px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  border-radius:16px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+  border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(18px);
+}
+.icon-box img{
+  max-width:44px;
+  max-height:44px;
+}
+.tool-card span{
+  font-size:.95rem;
+  letter-spacing:1.5px;
+  color:rgba(200,204,210,.85);
+}
+
+/* AI EDIT IMAGE */
+.ai-edit{
+  position:absolute;
+  top:140px;
+  right:120px;
+  width:160px;
+  cursor:move;
+  z-index:10;
+  transform-origin:center;
+  user-select:none;
+}
+.ai-edit img{
+  width:100%;
+  pointer-events:none;
+}
+
+/* ROTATE HANDLE (tools only) */
+.tools-section .rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  
+  border-radius:50%;
+  background:#60a5fa;
+  cursor:grab;
+}
+/*===skills====*/
+/* ===================== SKILLS SECTION (SCOPED) ===================== */
+
+#skills{
+  position: relative;
+  min-height: 100vh;
+  overflow: visible;
+}
+
+/* dark overlay */
+#skills::before{
+  content:"";
+  position:absolute;
+  inset:0;
+   background:
+    linear-gradient(rgba(5,10,25,0.95), rgba(5,10,25,0.85)),
+    url('image.jpeg') center/cover fixed no-repeat;
+  z-index:1;
+}
+
+#skills > *{
+  position: relative;
+  z-index: 2;
+  padding-top: 120px;  /* push content below navbar */
+
+}
+
+/* ================= HEADING ================= */
+.skills-heading{
+  font-family: 'Inter', 'Segoe UI', sans-serif; /* same family feel as TOOLS */
+  font-size: 3.8rem;
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;   /* SKILLS like TOOLS */
+  text-align: center;
+  margin-bottom: 40px;
+  background: linear-gradient(to bottom, #e6dcd7, #6d6967);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* ================= CARDS LAYOUT ================= */
+#skills .skills-container{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 40px;
+  padding: 0 80px;
+}
+
+/* ================= SKILL CARD ================= */
+#skills .skill-card{
+
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+  padding: 30px 26px;
+  backdrop-filter: blur(18px);
+
+  color: #ffffff;
+  text-align: center;
+}
+
+/* icon */
+#skills .skill-card .icon{
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+/* title */
+#skills .skill-card h3{
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* text */
+#skills .skill-card p{
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #d1d5db;
+  white-space: nowrap;     /* 🔑 stops line break */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  
+}
+
+/* ================= DRAGGABLE SKILL IMAGE ================= */
+#skills .skill-edit{
+  position:absolute;
+  top:120px;
+  left:80px;
+  width:150px;
+  cursor:move;
+  z-index:10;
+  transform-origin:center center;
+  user-select:none;
+}
+
+#skills .skill-edit img{
+  width:100%;
+  display:block;
+  pointer-events:none;
+}
+
+#skills .skill-edit.active{
+  outline:2px dashed rgba(177, 166, 166, 0.6);
+}
+
+/* rotate handle – SKILLS ONLY */
+#skills .rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#60a5fa;
+  cursor:grab;
+}
+
+/* freeze button – SKILLS ONLY */
+#skills .freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:600;
+  cursor:pointer;
+  z-index:9999;
+}
+
+/* ===== WORK TOGETHER SECTION ONLY ===== */
+/* ================= RESET (already exists in common file – OK) ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* ================= CONTACT SECTION ================= */
+.section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  width:100%;
+  text-align:center;
+  position:relative;
+  color:#fff;
+
+  /* navbar overlap fix */
+  scroll-margin-top:100px;
+}
+
+/* ================= TITLE IMAGE ================= */
+.section .title-image{
+  max-width:700px;
+  width:90%;
+  margin:0 auto;
+}
+
+/* ================= SOCIAL ICONS – FINAL FIX ================= */
+.socials{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:35px;
+}
+.socials a{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  text-decoration:none;
+  transition:.3s;
+}
+.github{border:2px solid #38bdf8;color:#38bdf8}
+.instagram{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);color:#fff}
+.linkedin{background:#0a66c2;color:#fff}
+.socials a:hover{transform:scale(1.15)}
+
+/* ================= RESUME IMAGE ================= */
+.section .resume-image{
+  position:absolute;
+  right:60px;
+  bottom:-20px;
+  width:160px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.section .resume-image:hover{
+  transform:scale(1.08);
+}
+
+/* ================= DRAGGABLE KEY IMAGE ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* ================= SECTION ================= */
+.section{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(5,10,25,0.95), rgba(5,10,25,0.85)),
+    url('image.jpeg') center/cover fixed no-repeat;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+  color:#fff;
+  scroll-margin-top:100px;
+}
+ 
+
+/* ================= TITLE ================= */
+.section .title-image{
+  max-width:700px;
+  width:90%;
+}
+
+/* ================= SOCIAL ICONS ================= */
+/* ================= SOCIAL ICONS – FINAL COLOR FIX ================= */
+.socials{
+  margin-top:30px;
+  display:flex;
+  gap:30px;
+  z-index:100;
+}
+
+/* COMMON ICON STYLE */
+.socials a{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-decoration:none;
+  font-size:24px;
+
+  background:rgba(0,0,0,0.55);
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.15),
+    0 12px 30px rgba(0,0,0,0.6);
+
+  transition:all 0.3s ease;
+}
+
+/* ICON BASE */
+.socials a i{
+  color:white;
+}
+
+/* ================= BRAND COLORS ================= */
+
+/* GITHUB */
+.socials a.github{
+  box-shadow:
+    0 0 0 2px #38bdf8,
+    0 12px 30px rgba(56,189,248,0.45);
+}
+.socials a.github i{
+  color:#38bdf8;
+}
+
+/* INSTAGRAM */
+.socials a.instagram{
+  background:linear-gradient(
+    45deg,
+    #f9ce34,
+    #ee2a7b,
+    #6228d7
+  );
+}
+.socials a.instagram i{
+  color:white;
+}
+
+/* LINKEDIN */
+.socials a.linkedin{
+  background:#0a66c2;
+}
+.socials a.linkedin i{
+  color:white;
+}
+
+/* ================= HOVER EFFECT ================= */
+.socials a:hover{
+  transform:translateY(-6px) scale(1.12);
+}
+
+
+/* ================= RESUME ================= */
+.section .resume-image{
+  position:absolute;
+  right:60px;
+  bottom:-20px;
+  width:160px;
+  cursor:pointer;
+}
+
+/* ================= DRAGGABLE KEY ================= */
+.section .editable{
+  position:absolute;
+  top:120px;
+  left:80px;
+  width:140px;
+  cursor:move;
+  z-index:50;
+}
+
+.section .editable img{
+  width:100%;
+  display:block;
+}
+
+/* ================= ROTATE HANDLE ================= */
+/* THE ULTIMATE LOCK */
+/* ===================== HARD FREEZE – FINAL ===================== */
+/* ================= FREEZE MODE ================= */
+
+
+
+/* Freeze everything EXCEPT project items */
+body.portfolio-frozen .editor-element,
+body.portfolio-frozen .about1-editable,
+body.portfolio-frozen .skill-edit,
+body.portfolio-frozen .editable:not([data-project]) {
+  pointer-events: none !important;
+}
+
+/* Kill text editing completely */
+body.portfolio-frozen [contenteditable] {
+  pointer-events: none !important;
+  user-select: none !important;
+  caret-color: transparent !important;
+}
+
+/* Hide ALL editor handles */
+body.portfolio-frozen .resize-handle,
+body.portfolio-frozen .rotate-handle,
+body.portfolio-frozen .about1-resize,
+body.portfolio-frozen .about1-rotate {
+  display: none !important;
+}
+
+/* ✅ Project cards stay clickable */
+[data-project] {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+
+
+ 
+
+/* REMOVE VERTICAL SCROLLBAR FROM PROJECT SLIDE */
+/* 🔥 FORCE-HIDE SCROLLBAR INSIDE PROJECT SLIDE */
+#projects,
+#projects * {
+  scrollbar-width: none !important;   /* Firefox */
+}
+
+#projects::-webkit-scrollbar,
+#projects *::-webkit-scrollbar {
+  width: 0 !important;               /* Chrome, Edge */
+  height: 0 !important;
+  display: none !important;
+}
+html, body {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+
+}
+
+/* 🔒 HARD CLIP – STOP IMAGE LEAKING */
+#intro,
+#slide3,
+#about,
+.about1-section,
+#projects,
+#folder,
+#skills,
+.section {
+  overflow-x: hidden;   /* ✅ only horizontal lock */
+}
+
+/* ===== PROJECT POPUP FIX ===== */
+
+
+
+/* overlay must receive clicks */
+#overlay {
+  pointer-events: auto;
+  z-index: 99999;
+}
+.project-item {
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+/* 🔒 Hide editor markers ONLY in Projects slide */
+#projects .editable {
+  outline: none !important;
+  border: none !important;
+  resize: none !important;
+}
+/* 🔒 HIDE EDITOR MARKS FOR key.png ONLY */
+.editable[data-id="key"],
+.editable[data-id="key"] {
+  outline: none !important;
+  border: none !important;
+}
+
+/* hide handles for key.png */
+.editable[data-id="key"] .resize-handle,
+.editable[data-id="key"] .rotate-handle {
+  display: none !important;
+}
+/* Resume must always be clickable */
+.resume-link {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+/* Allow clicking image */
+.resume-link img {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Prevent InteractJS from blocking click */
+.editor-element.resume-item {
+  pointer-events: auto;
+}
+p {
+  font-family:"Comic Sans MS","Comic Sans","Gloria Hallelujah",cursive;
+  font-size: 1.10rem;
+  line-height: 1.5;
+  color: #fc9fb6;
+  letter-spacing: 0.3px;
+  font-weight: 1000; /* ✅ REAL BOLD */
+}
+
+/* Editable paragraph text */
+.editor-text,
+.text-box{
+  font-family:"Comic Sans MS","Comic Sans","Gloria Hallelujah",cursive;
+  font-weight: 1000;  font-size: 1.60rem;
+  color: #96bfab;
+
+}
+/* ✅ SLIDE 3 – TEXT COLOR & SIZE ONLY */
+#slide3 .editor .text-box {
+  color: #71d0fe !important;   /* change color */
+  font-size: 1.45rem !important; /* change size */
+  line-height: 2.2rem !important;
+  font-weight: 520;
+}
+#slide3 .text-box {
+  text-align: left;
+  font-size: 1.55rem;
+  line-height: 2.05;
+  color: #6fb7ff;
+  margin: 0 auto;     /* centers the block */
+}
+/* 🔥 SLIDE 3 – FORCE TEXT BOX LENGTH (REAL FIX) */
+#slide3 .editor[data-id="t1"] {
+  width: 600px !important;   /* increase length */
+  max-width: 1100px !important;
+}
+
+#slide3 .editor[data-id="t2"] {
+  width: 600px !important;   /* increase length */
+  max-width: 1100px !important;
+}
+/* ===== CURSOR FILES ===== */
+
+/* ================= CURSOR SYSTEM – FINAL ================= */
+
+/* Base cursor (default for all slides) */
+html, body, * {
+  cursor: none !important;
+}
+
+.cursor-follower {
+  width: 60px;          /* 🔥 change size here */
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: fixed;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+}
+/* CLICK ME BUBBLE */
+#clickMeBubble{
+  position: fixed;
+  padding: 10px 26px;
+  background: #43d1ff;
+  color: #000;
+  font-weight: 900;
+  font-size: 18px;
+  border-radius: 999px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10000;
+  white-space: nowrap;
+}
+
+#clickMeBubble.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.site-title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.site-icon{
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+html{
+  scroll-behavior: smooth;
+}

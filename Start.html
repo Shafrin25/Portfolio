@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shafrin | Portfolio</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --text-light: #f8fafc;
+      --highlight: #0ea5e9;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      color: var(--text-light);
+      background-color: var(--bg-dark);
+      background-image: url('image.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #0f172a;
+      padding: 1rem 2.5rem;
+      z-index: 10;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo-img {
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .nav-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .nav-center button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .nav-center button:hover {
+      color: #38bdf8;
+    }
+
+    .contact-btn {
+      background: #1e90ff;
+      border: none;
+      padding: 0.7rem 1.7rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      transition: 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background: #0b63c9;
+      transform: scale(1.05);
+    }
+
+    /* HOME */
+    #home {
+      height: 90vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #home img {
+      width: 70%;
+      max-width: 700px;
+      filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.3));
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-wrapper">
+    <img src="Name.png" class="logo-img" alt="Logo">
+
+    <div class="nav-center">
+      <button onclick="scrollToSection('home')">Home</button>
+    </div>
+
+    <button class="contact-btn">
+      Contact Me 😊
+    </button>
+  </div>
+</nav>
+
+<!-- HOME SECTION ONLY -->
+<section id="home">
+  <img src="welcome.png" alt="Welcome Banner">
+</section>
+
+</body>
+</html>

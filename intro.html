@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shafrin | Intro Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:url("image.jpeg") center/cover fixed no-repeat;
+  background-color:rgba(0,0,0,0.75);
+  background-blend-mode:overlay;
+  font-family:'Gloria Hallelujah', cursive;
+  overflow-x:hidden;
+}
+
+.layout{
+  position:relative;
+  height:100vh;
+}
+
+/* editor */
+.editor-element{
+  position:absolute;
+  cursor:move;
+  user-select:none;
+}
+
+.resize-handle{
+  width:15px;
+  height:15px;
+  background:white;
+  border:2px solid black;
+  position:absolute;
+  bottom:-10px;
+  right:-10px;
+  cursor:se-resize;
+}
+
+.rotate-handle{
+  width:20px;
+  height:20px;
+  background:#1e90ff;
+  border-radius:50%;
+  border:2px solid white;
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  cursor:grab;
+}
+
+.editor-text{
+  color:#c3eaff;
+  font-size:1.9rem;
+  text-align:center;
+  line-height:1.6;
+}
+
+/* freeze button */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeLayout()">FREEZE LAYOUT</button>
+
+<div class="layout">
+
+  <!-- HEY IMAGE -->
+  <div class="editor-element" data-id="hey" style="top:20%; left:45%; width:280px; height:200px;">
+    <img src="hey.png" style="width:100%;height:100%;object-fit:contain;">
+    <div class="resize-handle"></div>
+    <div class="rotate-handle"></div>
+  </div>
+
+  <!-- RESUME -->
+  <div class="editor-element" data-id="resume" style="top:12%; left:70%; width:160px; height:160px;">
+    <img src="Click Me Resume.png" style="width:100%;height:100%;object-fit:contain;">
+    <div class="resize-handle"></div>
+    <div class="rotate-handle"></div>
+  </div>
+
+  <!-- DOLL VIDEO -->
+  <div class="editor-element" data-id="doll" style="top:22%; left:75%; width:320px; height:320px;">
+    <video src="doll.webm" autoplay loop muted playsinline
+      style="width:100%;height:100%;object-fit:contain;"></video>
+    <div class="resize-handle"></div>
+    <div class="rotate-handle"></div>
+  </div>
+
+  <!-- TEXT -->
+  <div class="editor-element editor-text" data-id="intro-text" contenteditable="true"
+       style="top:65%; left:30%; width:500px; height:150px;">
+    Hi, I'm Shafrin M – a curious creator and problem-solver<br>
+    who loves transforming ideas into experiences that feel<br>
+    simple, thoughtful, and delightfully human.
+    <div class="resize-handle"></div>
+    <div class="rotate-handle"></div>
+  </div>
+
+</div>
+
+<script>
+const elements=document.querySelectorAll('.editor-element');
+
+/* LOAD */
+elements.forEach(el=>{
+  const id=el.dataset.id;
+  const data=JSON.parse(localStorage.getItem(id));
+  if(!data) return;
+
+  Object.assign(el.style,{
+    top:data.top,
+    left:data.left,
+    width:data.width,
+    height:data.height,
+    transform:data.transform
+  });
+
+  if(el.classList.contains('editor-text')) el.innerHTML=data.text;
+});
+
+let active=null,startX,startY,startW,startH,startL,startT,startAngle;
+
+/* EDIT */
+elements.forEach(el=>{
+  const resize=el.querySelector('.resize-handle');
+  const rotate=el.querySelector('.rotate-handle');
+
+  el.addEventListener('mousedown',e=>{
+    if(e.target===resize||e.target===rotate) return;
+    active={el,type:'drag'};
+    startX=e.clientX; startY=e.clientY;
+    startL=el.offsetLeft; startT=el.offsetTop;
+  });
+
+  resize.addEventListener('mousedown',e=>{
+    e.stopPropagation();
+    active={el,type:'resize'};
+    startX=e.clientX; startY=e.clientY;
+    startW=el.offsetWidth; startH=el.offsetHeight;
+  });
+
+  rotate.addEventListener('mousedown',e=>{
+    e.stopPropagation();
+    active={el,type:'rotate'};
+    const r=el.getBoundingClientRect();
+    startAngle=Math.atan2(
+      e.clientY-(r.top+r.height/2),
+      e.clientX-(r.left+r.width/2)
+    )*180/Math.PI;
+  });
+});
+
+document.addEventListener('mousemove',e=>{
+  if(!active) return;
+  const el=active.el;
+
+  if(active.type==='drag'){
+    el.style.left=startL+(e.clientX-startX)+'px';
+    el.style.top=startT+(e.clientY-startY)+'px';
+  }
+  if(active.type==='resize'){
+    el.style.width=startW+(e.clientX-startX)+'px';
+    el.style.height=startH+(e.clientY-startY)+'px';
+  }
+  if(active.type==='rotate'){
+    const r=el.getBoundingClientRect();
+    const ang=Math.atan2(
+      e.clientY-(r.top+r.height/2),
+      e.clientX-(r.left+r.width/2)
+    )*180/Math.PI;
+    el.style.transform=`rotate(${ang-startAngle}deg)`;
+  }
+});
+
+document.addEventListener('mouseup',()=>{
+  if(!active) return;
+  save(active.el);
+  active=null;
+});
+
+function save(el){
+  localStorage.setItem(el.dataset.id,JSON.stringify({
+    top:el.style.top,
+    left:el.style.left,
+    width:el.style.width,
+    height:el.style.height,
+    transform:el.style.transform,
+    text:el.classList.contains('editor-text')?el.innerHTML:null
+  }));
+}
+
+/* FREEZE */
+function freezeLayout(){
+  localStorage.setItem('introFrozen','true');
+  elements.forEach(el=>{
+    el.style.pointerEvents='none';
+    el.querySelectorAll('.resize-handle,.rotate-handle')
+      .forEach(h=>h.remove());
+  });
+  document.querySelector('.freeze-btn').remove();
+  alert('Layout frozen permanently ✔');
+}
+
+/* RESTORE FREEZE */
+if(localStorage.getItem('introFrozen')){
+  elements.forEach(el=>{
+    el.style.pointerEvents='none';
+    el.querySelectorAll('.resize-handle,.rotate-handle')
+      .forEach(h=>h.remove());
+  });
+  document.querySelector('.freeze-btn')?.remove();
+}
+</script>
+
+</body>
+</html>

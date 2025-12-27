@@ -1,0 +1,84 @@
+/* ================= ABOUT-1 SAFE CSS ================= */
+
+#about1{
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ---------- EDITABLE ---------- */
+#about1 .editable{
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  transform-origin: center center;
+  pointer-events: auto;
+}
+
+/* IMAGES */
+#about1 .editable img{
+  width: 100%;
+  display: block;
+  pointer-events: none; /* important */
+}
+
+/* ---------- TEXT ---------- */
+#about1 .text-box{
+  z-index: 50;
+}
+
+#about1 .handwriting{
+  font-size: 1.6rem;
+  color: #fc9fb6;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* ---------- HANDLES (RESTORE ROTATION) ---------- */
+#about1 .resize-handle{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: -8px;
+  bottom: -8px;
+  background: #fff;
+  border: 2px solid #000;
+  cursor: se-resize;
+  z-index: 100;
+}
+
+#about1 .rotate-handle{
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #38bdf8;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: grab;
+  z-index: 100;
+}
+
+/* ---------- IMAGE LAYERING ---------- */
+#about1 [data-id="girls1"],
+#about1 [data-id="girls2"],
+#about1 [data-id="img3"]{
+  z-index: 10;
+}
+
+/* resume above images */
+#about1 [data-id="resume"]{
+  z-index: 20;
+}
+
+/* ---------- GIRLS ANIMATION ---------- */
+@keyframes girlsHorizontalLoop{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(45px); }
+}
+
+#about1 .girls-horizontal-loop {
+  animation: girlsHorizontalLoop 3s linear infinite;
+}

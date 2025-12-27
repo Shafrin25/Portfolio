@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Let's Work Together</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.85)),
+    url('image.jpeg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+/* MAIN */
+.section{
+  width:100%;
+  text-align:center;
+  position:relative;
+}
+
+/* TITLE */
+.title-image{
+  max-width:700px;
+  width:90%;
+  margin:0 auto;
+}
+
+/* SOCIALS */
+.socials{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:35px;
+}
+.socials a{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  text-decoration:none;
+  transition:.3s;
+}
+.github{border:2px solid #38bdf8;color:#38bdf8}
+.instagram{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);color:#fff}
+.linkedin{background:#0a66c2;color:#fff}
+.socials a:hover{transform:scale(1.15)}
+
+/* RESUME */
+.resume-image{
+  position:absolute;
+  right:60px;
+  bottom:-20px;
+  width:160px;
+  cursor:pointer;
+  transition:.3s;
+}
+.resume-image:hover{transform:scale(1.08)}
+
+/* EDITABLE KEY */
+.editable{
+  position:absolute;
+  top:120px;
+  left:80px;
+  width:140px;
+  cursor:move;
+  user-select:none;
+  transform-origin:center;
+}
+
+/* rotate handle */
+.rotate-handle{
+  position:absolute;
+  top:-35px;
+  left:50%;
+  transform:translateX(-50%);
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#38bdf8;
+  cursor:grab;
+}
+
+/* FREEZE BUTTON */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:600;
+  cursor:pointer;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeLayout()">FREEZE</button>
+
+<div class="section">
+
+  <img src="lets.png" class="title-image">
+
+  <div class="socials">
+    <a href="#" class="github"><i class="fa-brands fa-github"></i></a>
+    <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+  </div>
+
+  <a href="resume.pdf" target="_blank">
+    <img src="Click Me Resume.png" class="resume-image">
+  </a>
+
+  <!-- KEY -->
+  <div class="editable" id="keyBox" data-id="key">
+    <div class="rotate-handle"></div>
+    <img src="key.png" style="width:100%;display:block;">
+  </div>
+
+</div>
+
+<script>
+const el=document.getElementById('keyBox');
+let angle=0;
+
+/* LOAD SAVED */
+
+</script>
+
+</body>
+</html>

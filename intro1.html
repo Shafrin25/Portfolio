@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 3 – Canva Editor + Permanent Freeze</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(5,10,25,0.85), rgba(5,10,25,0.85)),
+    url("image.jpeg") center/cover no-repeat;
+  font-family:'Gloria Hallelujah', cursive;
+  color:#56c0e7;
+  overflow:hidden;
+}
+
+.slide3{
+  position:relative;
+  min-height:100vh;
+}
+
+/* text */
+.text-box{
+  max-width:780px;
+  font-size:1.3rem;
+  line-height:2.1rem;
+}
+.second{ margin-left:40px; }
+
+/* editor */
+.editor{
+  position:absolute;
+  cursor:move;
+  transform-origin:center;
+}
+
+/* handles */
+.rotate-handle{
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  width:12px;
+  height:12px;
+  background:#60a5fa;
+  border-radius:50%;
+  cursor:grab;
+}
+.resize-handle{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background:#fff;
+  border:1px solid #000;
+  right:-5px;
+  bottom:-5px;
+  cursor:se-resize;
+}
+
+/* freeze button */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:9999;
+}
+
+/* book float */
+.editor.book-3d img{
+  animation:bookFloat 6s ease-in-out infinite;
+  filter:drop-shadow(0 25px 35px rgba(0,0,0,0.6));
+}
+@keyframes bookFloat{
+  0%{transform:translateY(0) rotateX(6deg)}
+  50%{transform:translateY(-12px) rotateX(10deg)}
+  100%{transform:translateY(0) rotateX(6deg)}
+}
+
+/* hero arrow */
+.editor.arrow-hero-3d{perspective:1400px}
+.editor.arrow-hero-3d img{
+  animation:arrowHero 7s ease-in-out infinite;
+  filter:drop-shadow(0 40px 50px rgba(0,0,0,0.7));
+}
+@keyframes arrowHero{
+  0%{transform:rotateY(0)}
+  50%{transform:rotateY(20deg)}
+  100%{transform:rotateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeLayout()">FREEZE</button>
+
+<section class="slide3">
+
+  <div class="editor" data-id="t1" style="top:80px; left:100px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <p class="text-box" contenteditable="true">
+      I blend creativity, empathy, and logic to<br>
+      build digital experiences that make people smile and<br>
+      think. From designing intuitive interfaces to crafting<br>
+      data-powered solutions, I enjoy turning complex<br>
+      problems into elegant, user-friendly outcomes.
+    </p>
+  </div>
+
+  <div class="editor" data-id="t2" style="top:300px; left:140px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <p class="text-box second" contenteditable="true">
+      Whether I’m experimenting with AI, building<br>
+      interactive apps, or designing playful UI concepts, I<br>
+      aim to create work that feels meaningful, joyful, and<br>
+      full of imagination.
+    </p>
+  </div>
+
+  <div class="editor arrow-hero-3d" data-id="arrow" style="top:120px; right:260px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="arrow.png" width="160">
+  </div>
+
+  <div class="editor" data-id="arrow1" style="bottom:220px; left:120px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="arrow1.png" width="140">
+  </div>
+
+  <div class="editor book-3d" data-id="book" style="bottom:140px; left:300px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="book.png" width="130">
+  </div>
+
+  <div class="editor" data-id="resume" style="right:120px; bottom:120px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="Click Me Resume.png" width="160">
+  </div>
+
+</section>
+
+<script>
+/* ===== LOAD SAVED ===== */
+const saved = JSON.parse(localStorage.getItem('slide3Frozen'));
+if(saved){
+  document.querySelectorAll('.editor').forEach((el,i)=>{
+    const d=saved[i];
+    el.style.top=d.top+'px';
+    el.style.left=d.left+'px';
+    if(d.width) el.querySelector('img').style.width=d.width+'px';
+    if(d.fontSize) el.querySelector('p').style.fontSize=d.fontSize;
+    el.style.pointerEvents='none';
+    el.querySelectorAll('.rotate-handle,.resize-handle').forEach(h=>h.remove());
+  });
+  document.querySelector('.freeze-btn')?.remove();
+}
+
+/* ===== DRAG ===== */
+interact('.editor').draggable({
+  listeners:{
+    move(e){
+      if(saved) return;
+      const t=e.target;
+      t.dataset.x=(+t.dataset.x||0)+e.dx;
+      t.dataset.y=(+t.dataset.y||0)+e.dy;
+      t.style.transform=`translate(${t.dataset.x}px,${t.dataset.y}px)`;
+    }
+  }
+});
+
+/* ===== ROTATE ===== */
+interact('.rotate-handle').draggable({
+  listeners:{
+    move(e){
+      if(saved) return;
+      const el=e.target.parentElement;
+      el.dataset.a=(+el.dataset.a||0)+e.dx*0.5;
+      el.style.transform=`rotate(${el.dataset.a}deg)`;
+    }
+  }
+});
+
+/* ===== RESIZE ===== */
+interact('.resize-handle').draggable({
+  listeners:{
+    move(e){
+      if(saved) return;
+      const box=e.target.parentElement;
+      const el=box.querySelector('img,p');
+      if(el.tagName==='IMG'){
+        el.style.width=(el.offsetWidth+e.dx)+'px';
+      }else{
+        el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)+e.dx*0.2)+'px';
+      }
+    }
+  }
+});
+
+/* ===== FREEZE ===== */
+function freezeLayout(){
+  const parent=document.querySelector('.slide3').getBoundingClientRect();
+  const data=[];
+  document.querySelectorAll('.editor').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    data.push({
+      top:r.top-parent.top,
+      left:r.left-parent.left,
+      width:el.querySelector('img')?.offsetWidth||null,
+      fontSize:el.querySelector('p')
+        ?getComputedStyle(el.querySelector('p')).fontSize:null
+    });
+    el.style.pointerEvents='none';
+    el.querySelectorAll('.rotate-handle,.resize-handle').forEach(h=>h.remove());
+  });
+  localStorage.setItem('slide3Frozen',JSON.stringify(data));
+  document.querySelector('.freeze-btn').remove();
+}
+</script>
+
+</body>
+</html>

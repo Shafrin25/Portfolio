@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shafrin|Portfolio</title>
+  <link rel="icon" type="image/png" href="s.png">
+  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.cdnfonts.com/css/candice" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  crossorigin="anonymous" />
+
+
+
+  <!-- InteractJS (needed for slide3) -->
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+</head>
+
+<body>
+<div class="cursor-follower"></div>
+<!-- ================= NAVBAR ================= -->
+<div id="clickMeBubble">CLICK ME</div>
+
+
+<nav>
+  <div class="nav-wrapper">
+    <img src="Name.png" class="logo-img" alt="Logo">
+
+    <div class="nav-center">
+      <button onclick="scrollToSection('home')">Home</button>
+      <button onclick="scrollToSection('about')">About</button>
+      <button onclick="scrollToSection('projects')">Projects</button>
+      <button onclick="scrollToSection('skills')">Skills</button>
+      
+    </div>
+
+    <button class="contact-btn" onclick="scrollToSection('contact')">
+      <img src="contact.png" class="contact-icon" alt="Contact">
+    </button>
+
+  </div>
+
+<button class="freeze-btn" onclick="freezeLayout()">
+  FREEZE PORTFOLIO
+</button>
+</nav>
+</body>
+<!-- ================= HOME ================= -->
+<section id="home" class="page">
+  <img src="welcome.png" alt="Welcome Banner">
+</section>
+
+<!-- ================= INTRO (EDITOR PAGE) ================= -->
+<section id="intro" class="intro-section">
+ 
+
+  <div class="layout">
+
+    <!-- HEY IMAGE -->
+    <div class="editor-element" data-id="hey" style="top:20%; left:45%; width:280px; height:200px;">
+      <img src="hey.png" style="width:100%;height:100%;object-fit:contain;">
+      <div class="resize-handle"></div>
+      <div class="rotate-handle"></div>
+    </div>
+
+    <!-- RESUME -->
+    <a href="resume.pdf" target="_blank" class="resume-link" style="position:absolute; top:12%; left:70%; width:160px;">
+      <img src="Click Me Resume.png" style="width:100%; cursor:pointer;">
+    </a>
+
+    <!-- DOLL VIDEO -->
+    <div class="editor-element" data-id="doll" style="top:22%; left:75%; width:320px; height:320px;">
+      <video src="doll.webm" autoplay loop muted playsinline
+        style="width:100%;height:100%;object-fit:contain;"></video>
+      <div class="resize-handle"></div>
+      <div class="rotate-handle"></div>
+    </div>
+
+    <!-- INTRO TEXT -->
+    <div class="editor-element editor-text" data-id="intro-text" contenteditable="true"
+         style="top:65%; left:30%; width:500px; height:150px;">
+     Hi, I’m Shafrin curious creator and<br>
+     problem-solver who loves transforming ideas<br>
+     into experiences that feel simple, thoughtful,<br> 
+           and delightfully human.
+      <div class="resize-handle"></div>
+      <div class="rotate-handle"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SLIDE 3 ================= -->
+<section id="slide3" class="slide3">
+
+  <div class="editor" data-id="t1" style="top:80px; left:40px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <p class="text-box" contenteditable="true">
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I blend creativity, empathy, and logic to<br>
+     build digital experiences that make people smile<br>
+     and   think. From designing intuitive interfaces to<br>
+     crafting data-powered solutions, I enjoy turning<br>
+     complex problems into elegant, user-friendly<br>
+     outcomes.
+    </p>
+
+
+  </div>
+
+  <div class="editor" data-id="t2" style="top:350px; left:140px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <p class="text-box second" contenteditable="true">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether I’m experimenting with AI, building<br>
+      interactive apps, or designing playful UI concepts,<br>
+      I aim to create work that feels meaningful, joyful,<br>
+      and full of imagination.
+    </p>
+  </div>
+
+  <!-- arrow -->
+  <div class="editor arrow-hero-3d" data-id="arrow" style="top:120px; left:820px; width:160px; height:auto;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+      <img src="arrow.png" alt="Arrow decoration">
+    </div>
+
+  <!-- arrow 2 -->
+  <div class="editor" data-id="arrow1" style="top:465px; left:100px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="arrow1.png" width="140">
+  </div>
+
+  <!-- book -->
+  <div class="editor book-3d" data-id="book" style="top:520px; left:300px;">
+    <div class="rotate-handle"></div>
+    <div class="resize-handle"></div>
+    <img src="book.png" width="130">
+  </div>
+
+  <!-- resume -->
+  <div class="editor" data-id="resume-slide3" style="top:520px; left:900px; width:160px;">
+   <div class="rotate-handle"></div>
+   <div class="resize-handle"></div>
+   <a href="resume.pdf" target="_blank" class="resume-link">
+     <img src="Click Me Resume.png" style="width:100%">
+   </a>
+  </div>
+
+
+</section>
+
+<!-- ================= ABOUT SLIDE ================= -->
+<section id="about" class="about-section">
+  <div id="canvas">
+
+    <!-- ABOUT IMAGE -->
+    <div class="element about-3d" style="top:143px; left:159px; width:260px;">
+      <img src="about.png" alt="About">
+    </div>
+
+    <!-- PARAGRAPH 1 -->
+    <div class="element text" style="top:222px; left:328px; width:612px;">
+      <p>
+        I'm a final-year B.Tech CSE (AI & Data Science) student at 
+        Hindustan Institute of Technology and Science, with a passion for
+        building things that are creative, useful, and a little bit magical.
+      </p>
+    </div>
+
+    <!-- PARAGRAPH 2 -->
+    <div class="element text" style="top:364px; left:434px; width:707px;">
+      <p>
+        I love exploring how technology can improve everyday life whether it's through
+        smart applications, polished UI/UX, or AI-powered tools. I enjoy learning new
+        concepts, experimenting with ideas, and crafting solutions that balance logic,
+        design, and creativity.
+      </p>
+    </div>
+
+    <!-- MUSHROOM -->
+    <div class="element mush-3d" style="top:298px; left:850px; width:87px;">
+      <img src="mush.png" alt="Mushroom">
+    </div>
+
+    <!-- CLICK ME RESUME -->
+    <a href="resume.pdf" target="_blank">
+      <div class="element resume-btn" style="top:430px; left:1099px; width:160px;">
+       <img src="Click Me Resume.png" alt="Resume">
+      </div>
+    </a>
+
+
+  </div>
+</section>
+
+<!-- ================= ABOUT SECTION ================= -->
+<section class="about1-section" id="slide5">
+
+
+  <!-- TEXT -->
+  <div class="about1-editable about1-text"
+       data-id="about1-text"
+       style="left:50%; top:40%; width:700px;">
+    <p class="about1-handwriting" contenteditable="true">
+      When I'm not coding or designing, you'll probably find me drawing,
+      crafting, or dreaming up new product ideas. I believe in working
+      with curiosity, collaborating with kindness, and always adding
+      a touch of imagination to everything I do.
+    </p>
+    <div class="about1-resize"></div>
+    <div class="about1-rotate"></div>
+  </div>
+
+  <!-- girls.png -->
+  <div class="about1-editable about1-loop"
+       data-id="about1-girls1"
+       style="left:80px; top:120px; width:220px;">
+    <img src="girls.png">
+    <div class="about1-resize"></div>
+    <div class="about1-rotate"></div>
+  </div>
+
+  <!-- girlb.png -->
+  <div class="about1-editable"
+       data-id="about1-girls2"
+       style="right:100px; top:160px; width:240px;">
+    <img src="girlb.png">
+    <div class="about1-resize"></div>
+    <div class="about1-rotate"></div>
+  </div>
+
+  <!-- image3 -->
+  <div class="about1-editable"
+       data-id="about1-img3"
+       style="left:120px; bottom:100px; width:200px;">
+    <img src="image3.png">
+    <div class="about1-resize"></div>
+    <div class="about1-rotate"></div>
+  </div>
+
+  <!-- RESUME -->
+  <a href="resume.pdf" target="_blank">
+    <div class="about1-editable"
+         data-id="about1-resume"
+         style="
+         left:1066.6665px;
+         top:400.6668px;
+         width:152px;
+         height:155px;
+         transform: rotate(0deg);
+         ">
+     <img src="Click Me Resume.png" alt="Resume">
+    </div>
+  </a>
+
+
+</section>
+
+
+<!-- ================= OTHER SECTIONS ================= -->
+
+<section id="projects" class="projects">
+
+<div class="project-section">
+
+  <!-- TITLE -->
+  <div class="editable" data-id="title"
+       style="left:178px; top:38px; width:334px;">
+    <img src="project.png" style="width:100%">
+  </div>
+
+  <!-- BUNNY -->
+ <!-- BUNNY -->
+<div class="editable project-item"
+     data-id="bunny"
+     data-project="bunny"
+     style="left:690px; top:196px; width:325px;">
+  <img src="bunny.png" style="width:100%">
+</div>
+
+<!-- WEB -->
+<div class="editable project-item"
+     data-id="web"
+     data-project="web"
+     style="left:880px; top:65px; width:332px;">
+  <img src="web.png" style="width:100%">
+</div>
+
+
+  <!-- VIDEO PROJECT -->
+  <div class="editable project-video" data-id="video"
+       style="left:420px; top:320px; width:360px;">
+    <video src="project.mp4" autoplay muted loop></video>
+  </div>
+
+  <!-- RESUME -->
+  <a href="resume.pdf" target="_blank" class="resume-link">
+   <div class="editor-element resume-item"
+       data-id="resume-slide3"
+       style="top:520px; left:900px; width:160px; height:160px;">
+       
+     <img src="Click Me Resume.png"
+         style="width:100%; height:100%; object-fit:contain; pointer-events:auto;">
+         
+     <div class="resize-handle"></div>
+     <div class="rotate-handle"></div>
+   </div>
+  </a>
+
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="card3d" id="card"></div>
+</div>
+
+</section>
+
+<section id="folder" class="folder">
+  <div class="experience-title">
+  EXPERIENCE
+  </div>
+
+  <div class="bg-image"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="stage">
+
+    <div class="wrapper">
+
+      <!-- LEFT FOLDER -->
+      <div class="folder-container editor-item" data-id="leftFolder">
+        <img src="file1.png" class="folder-img">
+        <div class="cards">
+          <img src="1.png" class="card c1">
+          <img src="2.png" class="card c2">
+          <img src="3.png" class="card c3">
+        </div>
+      </div>
+
+      <!-- RIGHT FOLDER -->
+      <div class="folder-container editor-item" data-id="rightFolder">
+        <img src="file2.png" class="folder-img">
+        <div class="cards">
+          <img src="4.png" class="card c1">
+          <img src="5.png" class="card c2">
+          <img src="6.png" class="card c3">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ✅ RESUME (CORRECT PLACE) -->
+    <a href="resume.pdf" target="_blank">
+     <div class="resume-folder-fixed">
+        <img src="Click Me Resume.png" alt="Resume">
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section class="tools-section slide-bg-common" id="tools">
+
+  <h2 class="tools-title">TOOLS</h2>
+
+  <div class="tools-grid">
+    <div class="tools-track">
+      <div class="tool-card"><div class="icon-box"><img src="chatgpt.png"></div><span>CHAT GPT</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="figma.png"></div><span>FIGMA</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="canva.png"></div><span>CANVA</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="powerpoint.png"></div><span>POWERPOINT</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="excel.png"></div><span>EXCEL</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="vscode.png"></div><span>VS CODE</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="github.png"></div><span>GITHUB</span></div>
+      <div class="tool-card"><div class="icon-box"><img src="powerbi.png"></div><span>POWER BI</span></div>
+    </div>
+  </div>
+
+
+  <!-- AI IMAGE -->
+  <div class="ai-edit" id="aiEdit" data-id="ai">
+    <div class="rotate-handle"></div>
+    <img src="ai.png" alt="AI">
+  </div>
+
+</section>
+<section id="skills" class="skills slide-bg-common">
+  <h1 class="skills-heading">Skills</h1>
+
+  <div class="skills-container">
+    <div class="skill-card">
+      <div class="icon">💻</div>
+      <h3>Languages</h3>
+      <p>Python</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">🌐</div>
+      <h3>Web</h3>
+      <p>HTML | CSS</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">🗄️</div>
+      <h3>Database</h3>
+      <p>MySQL</p>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">🛠️</div>
+      <h3>Tools</h3>
+      <p>Pandas | NumPy | Matplotlib</p>
+    </div>
+  </div>
+
+  <!-- skill image -->
+  <div class="skill-edit" id="skillEdit" data-id="skill">
+    <div class="rotate-handle"></div>
+    <img src="skill.png" alt="skill">
+  </div>
+</section>
+
+<section id="contact" class="section">
+
+  <img src="lets.png" class="title-image">
+
+  <div class="socials">
+  <!-- GitHub -->
+  <a href="https://github.com/Shafrin25" target="_blank" class="github" aria-label="GitHub">
+    <i class="fa-brands fa-github"></i>
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/artesium_animation/" target="_blank" class="instagram" aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <!-- Email (NEW – next to Instagram) -->
+  <a href="mailto:Shafrinmunavarsulthan@gmail.com" class="email" aria-label="Email">
+    <i class="fa-solid fa-envelope"></i>
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="https://www.linkedin.com/in/shafrin-m-40321b259" target="_blank" class="linkedin" aria-label="LinkedIn">
+    <i class="fa-brands fa-linkedin-in"></i>
+  </a>
+</div>
+
+
+  <a href="resume.pdf" target="_blank">
+    <img src="Click Me Resume.png" class="resume-image">
+  </a>
+
+  <div class="editable" id="keyBox" data-id="key">
+    <div class="rotate-handle"></div>
+    <img src="key.png">
+  </div>
+
+</section>
+
+
+<script src="finall.js"></script>
+
+
+</body>
+</html>

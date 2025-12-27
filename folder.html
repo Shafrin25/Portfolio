@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Folder Editor – FINAL (Resume Click Works)</title>
+
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* BACKGROUND */
+.bg-image{
+  position:fixed; inset:0;
+  background:url("image.jpeg") center/cover no-repeat;
+  z-index:-2;
+}
+.bg-overlay{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.75);
+  z-index:-1;
+}
+
+body{
+  overflow:hidden;
+  font-family:sans-serif;
+}
+
+/* STAGE */
+.stage{
+  width:100vw;
+  height:100vh;
+  padding:140px 160px 120px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.wrapper{
+  display:flex;
+  gap:240px;
+}
+
+/* EDITOR ITEM */
+.editor-item{
+  position:relative;
+  cursor:move;
+  touch-action:none;
+  transform-origin:center;
+}
+
+/* FOLDER */
+.folder-container{
+  width:300px;
+  height:220px;
+}
+.folder-img{
+  width:100%;
+}
+
+/* CARDS */
+.cards{
+  position:absolute;
+  top:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+.card{
+  position:absolute;
+  width:250px;
+  border-radius:18px;
+  opacity:0;
+  transform:translate(-50%,60px) scale(.65);
+  transition:0.6s;
+}
+
+/* HOVER ANIMATION */
+.folder-container:hover .c1{
+  transform:translate(-261px,-120px) rotate(-14deg);
+  opacity:1;
+}
+.folder-container:hover .c2{
+  transform:translate(0,-160px);
+  opacity:1;
+}
+.folder-container:hover .c3{
+  transform:translate(261px,-120px) rotate(14deg);
+  opacity:1;
+}
+
+/* 3D RESUME */
+.folder-3d{
+  position:absolute;
+  top:70px;
+  left:70px;
+  width:240px;
+  perspective:1200px;
+}
+.folder-3d-inner{
+  transform-style:preserve-3d;
+  transform:rotateX(18deg) rotateY(-22deg) translateZ(40px);
+}
+.folder-3d-inner img{
+  width:100%;
+  cursor:pointer;
+  filter:drop-shadow(0 45px 55px rgba(0,0,0,0.7));
+}
+
+/* ROTATE HANDLE */
+.rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  background:#f97316;
+  border-radius:50%;
+  cursor:grab;
+}
+
+/* FREEZE BUTTON */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:600;
+  cursor:pointer;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeAll()">FREEZE</button>
+
+<div class="bg-image"></div>
+<div class="bg-overlay"></div>
+
+<div class="stage">
+  <div class="wrapper">
+
+    <!-- LEFT FOLDER -->
+    <div class="folder-container editor-item" data-id="leftFolder">
+      <img src="file1.png" class="folder-img">
+      <div class="cards">
+        <img src="1.png" class="card c1">
+        <img src="2.png" class="card c2">
+        <img src="3.png" class="card c3">
+      </div>
+    </div>
+
+    <!-- RIGHT FOLDER -->
+    <div class="folder-container editor-item" data-id="rightFolder">
+      <img src="file2.png" class="folder-img">
+      <div class="cards">
+        <img src="4.png" class="card c1">
+        <img src="5.png" class="card c2">
+        <img src="6.png" class="card c3">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESUME (CLICKABLE EVEN AFTER FREEZE) -->
+<div class="editor-item folder-3d" data-id="resume3d">
+  <div class="rotate-handle"></div>
+  <div class="folder-3d-inner">
+    <a href="resume.pdf" target="_blank">
+      <img src="Click Me Resume.png" draggable="false">
+    </a>
+  </div>
+</div>
+
+<script>
+/* LOAD SAVED */
+document.querySelectorAll('.editor-item').forEach(el=>{
+  const d = JSON.parse(localStorage.getItem(el.dataset.id));
+  if(!d) return;
+  el.dataset.x=d.x;
+  el.dataset.y=d.y;
+  el.dataset.rotate=d.rotate;
+  el.style.transform=
+    `translate(${d.x}px,${d.y}px) rotate(${d.rotate}deg)`;
+});
+
+/* DRAG (IMPORTANT FIX) */
+interact('.editor-item').draggable({
+  ignoreFrom: 'a, a *',   // 🔥 RESUME CLICK FIX
+  listeners:{
+    move(e){
+      if(localStorage.getItem('foldersFrozen')) return;
+      const t=e.target;
+      t.dataset.x=(+t.dataset.x||0)+e.dx;
+      t.dataset.y=(+t.dataset.y||0)+e.dy;
+      apply(t);
+    }
+  }
+});
+
+/* ROTATE */
+interact('.rotate-handle').draggable({
+  listeners:{
+    move(e){
+      if(localStorage.getItem('foldersFrozen')) return;
+      const t=e.target.parentElement;
+      t.dataset.rotate=(+t.dataset.rotate||0)+e.dx;
+      apply(t);
+    }
+  }
+});
+
+/* APPLY */
+function apply(el){
+  el.style.transform=
+    `translate(${el.dataset.x||0}px,${el.dataset.y||0}px)
+     rotate(${el.dataset.rotate||0}deg)`;
+}
+
+/* SAVE */
+function saveAll(){
+  document.querySelectorAll('.editor-item').forEach(el=>{
+    localStorage.setItem(el.dataset.id,JSON.stringify({
+      x:+el.dataset.x||0,
+      y:+el.dataset.y||0,
+      rotate:+el.dataset.rotate||0
+    }));
+  });
+}
+
+/* FREEZE (SAFE) */
+function freezeAll(){
+  saveAll();
+  localStorage.setItem('foldersFrozen','true');
+
+  document.querySelectorAll('.editor-item').forEach(el=>{
+    if(!el.classList.contains('folder-container') &&
+       !el.closest('.folder-container')){
+      el.style.pointerEvents='none';
+    }
+  });
+
+  document.querySelectorAll('.rotate-handle').forEach(h=>h.remove());
+  document.querySelector('.freeze-btn').remove();
+  alert('Layout frozen ✔ Resume still clickable');
+}
+
+/* RESTORE FREEZE */
+if(localStorage.getItem('foldersFrozen')){
+  document.querySelectorAll('.editor-item').forEach(el=>{
+    if(!el.classList.contains('folder-container') &&
+       !el.closest('.folder-container')){
+      el.style.pointerEvents='none';
+    }
+  });
+  document.querySelectorAll('.rotate-handle').forEach(h=>h.remove());
+  document.querySelector('.freeze-btn')?.remove();
+}
+</script>
+
+</body>
+</html>

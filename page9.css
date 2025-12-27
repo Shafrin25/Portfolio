@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Section */
+.skills-section {
+  position: relative;
+  min-height: 100vh;
+  background: url("image.jpeg") center/cover no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Black transparency overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+
+/* Skills Heading */
+.skills-heading {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 50px;
+
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 64px;
+  color: #68b7ec;
+  text-align: center;
+
+  text-shadow:
+    0 0 10px rgba(104, 183, 236, 0.35),
+    0 0 25px rgba(104, 183, 236, 0.25);
+}
+
+/* Card container */
+.skills-container {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: nowrap;   /* keeps all 4 cards in one row */
+}
+
+/* Cards – glass style */
+.skill-card {
+  width: 260px;
+  height: 180px;
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  color: #f1f5f9;
+
+  background: rgba(20, 30, 50, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+
+  transition: all 0.35s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(30, 45, 70, 0.65);
+
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Icon */
+.icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  color: #7dd3fc;
+}
+
+/* Card headings */
+.skill-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Card text */
+.skill-card p {
+  font-size: 15px;
+  color: #cbd5e1;
+}

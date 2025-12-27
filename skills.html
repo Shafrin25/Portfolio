@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skills Section</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<link rel="stylesheet" href="page9.css">
+
+<style>
+.skill-edit{
+  position:absolute;
+  top:120px;
+  left:80px;
+  width:150px;
+  cursor:move;
+  z-index:10;
+  transform-origin:center center;
+  user-select:none;
+}
+
+.skill-edit img{
+  width:100%;
+  display:block;
+  pointer-events:none;
+}
+
+.skill-edit.active{
+  outline:2px dashed rgba(255,255,255,0.6);
+}
+
+/* rotate handle */
+.rotate-handle{
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#60a5fa;
+  cursor:grab;
+}
+
+/* freeze button */
+.freeze-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  font-weight:600;
+  cursor:pointer;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<button class="freeze-btn" onclick="freezeSkill()">FREEZE</button>
+
+<section class="skills-section">
+
+  <h1 class="skills-heading">Skills</h1>
+  <div class="overlay"></div>
+
+  <div class="skills-container">
+    <div class="skill-card"><div class="icon">💻</div><h3>Languages</h3><p>Python</p></div>
+    <div class="skill-card"><div class="icon">🌐</div><h3>Web</h3><p>HTML | CSS</p></div>
+    <div class="skill-card"><div class="icon">🗄️</div><h3>Database</h3><p>MySQL</p></div>
+    <div class="skill-card"><div class="icon">🛠️</div><h3>Tools</h3><p>Pandas | NumPy | Matplotlib</p></div>
+  </div>
+
+  <!-- skill image -->
+  <div class="skill-edit" id="skillEdit" data-id="skill">
+    <div class="rotate-handle"></div>
+    <img src="skill.png" alt="skill">
+  </div>
+
+</section>
+
+<script>
+const box=document.getElementById("skillEdit");
+let angle=0;
+
+/* LOAD SAVED */
+const saved=JSON.parse(localStorage.getItem("skill"));
+if(saved){
+  box.style.width=saved.width;
+  box.style.transform=
+    `translate(${saved.x}px,${saved.y}px) rotate(${saved.angle}deg)`;
+  box.dataset.x=saved.x;
+  box.dataset.y=saved.y;
+  angle=saved.angle;
+}
+
+/* DRAG */
+interact(box).draggable({
+  listeners:{
+    move(e){
+      if(localStorage.getItem("skillFrozen")) return;
+      const x=(+box.dataset.x||0)+e.dx;
+      const y=(+box.dataset.y||0)+e.dy;
+      box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+      box.dataset.x=x; box.dataset.y=y;
+    }
+  }
+});
+
+/* RESIZE */
+interact(box).resizable({
+  edges:{left:true,right:true,top:true,bottom:true}
+}).on("resizemove",e=>{
+  if(localStorage.getItem("skillFrozen")) return;
+  box.style.width=e.rect.width+"px";
+  const x=(+box.dataset.x||0)+e.deltaRect.left;
+  const y=(+box.dataset.y||0)+e.deltaRect.top;
+  box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+  box.dataset.x=x; box.dataset.y=y;
+});
+
+/* ROTATE */
+interact(".rotate-handle").draggable({
+  listeners:{
+    move(e){
+      if(localStorage.getItem("skillFrozen")) return;
+      angle+=e.dx;
+      const x=+box.dataset.x||0;
+      const y=+box.dataset.y||0;
+      box.style.transform=`translate(${x}px,${y}px) rotate(${angle}deg)`;
+    }
+  }
+});
+
+/* SAVE */
+function save(){
+  localStorage.setItem("skill",JSON.stringify({
+    x:+box.dataset.x||0,
+    y:+box.dataset.y||0,
+    width:box.style.width,
+    angle
+  }));
+}
+document.addEventListener("mouseup",save);
+
+/* FREEZE */
+function freezeSkill(){
+  save();
+  localStorage.setItem("skillFrozen","true");
+  box.querySelector(".rotate-handle")?.remove();
+  box.style.pointerEvents="none";
+  document.querySelector(".freeze-btn").remove();
+  alert("Skill layout frozen permanently ✔");
+}
+
+/* RESTORE FREEZE */
+if(localStorage.getItem("skillFrozen")){
+  box.querySelector(".rotate-handle")?.remove();
+  box.style.pointerEvents="none";
+  document.querySelector(".freeze-btn")?.remove();
+}
+
+/* ACTIVE OUTLINE */
+box.addEventListener("mousedown",()=>box.classList.add("active"));
+document.addEventListener("mousedown",e=>{
+  if(!box.contains(e.target)) box.classList.remove("active");
+});
+</script>
+
+</body>
+</html>
