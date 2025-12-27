@@ -1477,3 +1477,13 @@ html{
     display: none !important;
   }
 }
+/* PUBLIC VIEW = HR MODE */
+.public-view .editor,
+.public-view .editor-element,
+.public-view .about1-editable,
+.public-view .resize-handle,
+.public-view .rotate-handle,
+.public-view .freeze-btn {
+  pointer-events: none !important;
+  user-select: none !important;
+}

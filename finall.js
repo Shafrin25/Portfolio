@@ -1,12 +1,10 @@
-/* ===== FORCE PUBLIC VIEW ON GITHUB PAGES ===== */
+// AUTO-FREEZE ON GITHUB PAGES (PUBLIC / HR VIEW)
 const isGitHubPages = location.hostname.includes("github.io");
 
 if (isGitHubPages) {
   localStorage.setItem("portfolioFrozen", "true");
   document.body.classList.add("portfolio-frozen", "public-view");
 }
-
-
 
 /**********************************************************
   1. MODE DETECTION & PERSISTENCE
