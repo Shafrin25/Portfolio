@@ -105,9 +105,8 @@ nav {
 
 /* HOME */
 #home {
-  height: 90vh;
-  padding:90px;
-  width: 100%;
+  min-height: calc(100vh - 90px); /* full screen minus navbar */
+  padding-top: 90px;             /* push content below navbar */
   display: flex;
   justify-content: center;
   align-items: center;
