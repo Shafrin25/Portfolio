@@ -107,10 +107,16 @@ nav {
 #home {
   min-height: 100vh;
   width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   margin-top: 90px;  
+
+  /* 🔑 THIS IS THE FIX */
+  margin-top: 90px;   /* navbar height */
+
 }
 
 
@@ -119,6 +125,7 @@ nav {
   max-width: 700px;
   filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.3));
 }
+
 .menu{
   display:flex;
   gap:24px;
@@ -1411,4 +1418,53 @@ html, body, * {
 }
 html{
   scroll-behavior: smooth;
+}
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* Stop drag chaos */
+  * {
+    touch-action: manipulation;
+  }
+
+  /* Navbar spacing */
+  nav {
+    height: 70px;
+    padding: 0 16px;
+  }
+
+  /* HOME section */
+  #home {
+    min-height: 100vh;
+    margin-top: 70px;
+  }
+
+  #home img {
+    width: 90%;
+    max-width: 360px;
+  }
+
+  /* Hide editor-only visuals */
+  .resize-handle,
+  .rotate-handle,
+  .about1-resize,
+  .about1-rotate,
+  .freeze-btn {
+    display: none !important;
+  }
+
+  /* Center intro text */
+  .editor-text,
+  .text-box {
+    font-size: 1.1rem !important;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* Reduce floating clutter */
+  .editor-element,
+  .about1-editable,
+  .skill-edit {
+    transform: none !important;
+  }
 }
