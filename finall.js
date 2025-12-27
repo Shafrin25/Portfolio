@@ -2,7 +2,9 @@
   1. MODE DETECTION & PERSISTENCE
 **********************************************************/
 const urlParams = new URLSearchParams(window.location.search);
-const isPublicMode = urlParams.get('view') === 'true';
+const isPublicMode =
+  window.location.hostname.includes("github.io") ||
+  urlParams.get('view') === 'true';
 
 // Check if we previously clicked "Freeze"
 let frozen = localStorage.getItem("portfolioFrozen") === "true";
