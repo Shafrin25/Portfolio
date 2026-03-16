@@ -5,40 +5,34 @@ const video3 = document.getElementById('projectVideo3');
 // Sidebar elements //
 const sideBar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu-icon');
-const closeIcon = document.querySelector('.close-icon');
+const closeIcon = document.querySelector('.close-icon')
+
 
 const hoverSign = document.querySelector('.hover-sign');
 
-const videoList = [video1, video2, video3].filter(video => video !== null);
+const videoList =[video1, video2, video3];
 
-videoList.forEach(function(video) {
-    if (video) {
-        video.addEventListener("mouseover", function() {
-            video.play();
-            if (hoverSign) hoverSign.classList.add("active");
-        });
-        video.addEventListener("mouseout", function() {
-            video.pause();
-            if (hoverSign) hoverSign.classList.remove("active");
-        });
-    }
-});
-
+videoList.forEach (function(video){
+    video.addEventListener("mouseover", function(){
+        video.play()
+        hoverSign.classList.add("active")
+    })
+    video.addEventListener("mouseout", function(){
+    video.pause();
+    hoverSign.classList.remove("active")
+})
+})
 function showMessage() {
     alert("Sorry, this feature is under development.\n\nPlease contact me via email: shafrinmunavarsulthan@gmail.com");
 }
+// Sidebar elements //
+menu.addEventListener("click", function(){
+    sideBar.classList.remove("close-sidebar")
+    sideBar.classList.add("open-sidebar")
+});
 
-// Sidebar functionality //
-if (menu && sideBar) {
-    menu.addEventListener("click", function() {
-        sideBar.classList.remove("close-sidebar");
-        sideBar.classList.add("open-sidebar");
-    });
-}
-
-if (closeIcon && sideBar) {
-    closeIcon.addEventListener("click", function() {
-        sideBar.classList.remove("open-sidebar");
-        sideBar.classList.add("close-sidebar");
-    });
-}
+closeIcon.addEventListener("click", function(){
+    sideBar.classList.remove("open-sidebar");
+    sideBar.classList.add("close-sidebar");
+    
+})
